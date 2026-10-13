@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #09090b;
+  --color-ink-2: #0e0e11;
+  --color-surface: #141418;
+  --color-surface-2: #1b1b21;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.14);
+  --color-cream: #efebe4;
+  --color-muted: #8f8d96;
+  --color-dim: #5d5b64;
+  --color-ember: #ff6a3d;
+  --color-amber: #ffb547;
+  --color-violet: #7c5cff;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-spin-slower: spin 60s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-drift: drift 24s ease-in-out infinite alternate;
+  --animate-drift-reverse: drift 30s ease-in-out infinite alternate-reverse;
+  --animate-pulse-ring: pulse-ring 2.2s var(--ease-out-expo) infinite;
+  --animate-scroll-line: scroll-line 2.4s var(--ease-in-out-quart) infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate3d(-6%, -4%, 0);
+    }
+    50% {
+      transform: translate3d(5%, 6%, 0);
+    }
+    100% {
+      transform: translate3d(-3%, 8%, 0);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes scroll-line {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    45% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    55% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1440px;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--color-ember) 0%, var(--color-amber) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-stroke {
+  -webkit-text-stroke: 1px rgb(239 235 228 / 0.22);
+  color: transparent;
+}
+
+@utility glass {
+  background: rgb(24 24 29 / 0.82);
+  border: 1px solid var(--color-line);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility mask-fade-edges {
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-ember);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Film grain over everything — static, so it is rasterised once and only composited. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Preloader: counts on first paint, before JavaScript has loaded. */
+@property --preloader-num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@counter-style preloader-pad {
+  system: extends decimal;
+  pad: 3 "0";
+}
+
+.preloader-count {
+  counter-reset: preloader var(--preloader-num);
+  animation: preloader-count 0.95s cubic-bezier(0.65, 0, 0.35, 1) 0.05s both;
+}
+
+.preloader-count::after {
+  content: counter(preloader, preloader-pad);
+}
+
+.preloader-bar {
+  transform-origin: left;
+  animation: preloader-bar 0.95s cubic-bezier(0.65, 0, 0.35, 1) 0.05s both;
+}
+
+.preloader-char {
+  animation: preloader-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.preloader-fade {
+  animation: preloader-fade 0.6s ease 0.4s both;
+}
+
+@keyframes preloader-count {
+  from {
+    --preloader-num: 0;
+  }
+  to {
+    --preloader-num: 100;
+  }
+}
+
+@keyframes preloader-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes preloader-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes preloader-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Faster start-up: off-screen sections skip layout until the page has settled (see providers.tsx). */
+html:not([data-settled]) main > section:nth-of-type(n + 3),
+html:not([data-settled]) footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
+}
+
+/* Returning visitors (same browser session) skip the intro. */
+html[data-skip-intro] .preloader {
+  display: none;
+}
+
+/* Safety net: if JavaScript hasn't taken over within 4.5s (blocked, offline, very slow device),
+   drop the intro and show the content in its final state. */
+@keyframes failsafe-hide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes failsafe-show {
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+html:not([data-hydrated]) .preloader {
+  animation: failsafe-hide 0.4s ease 4.5s forwards;
+}
+
+html:not([data-hydrated])
+  :is(header, main, footer):is([style*="opacity:0"], [style*="transform:translate"], [style*="transform:scale(0"], [style*="clip-path:inset(100%"]),
+html:not([data-hydrated])
+  :is(header, main, footer)
+  :is([style*="opacity:0"], [style*="transform:translate"], [style*="transform:scale(0"], [style*="clip-path:inset(100%"]) {
+  animation: failsafe-show 0.4s ease 4.5s forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@media (pointer: coarse) {
+  .cursor-layer {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  .preloader {
+    display: none !important;
+  }
+
+  :is(main, footer) [style*="transform"] {
+    transform: none !important;
+  }
+}
