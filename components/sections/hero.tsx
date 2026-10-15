@@ -176,12 +176,23 @@ export function Hero() {
         {/* Main */}
         <div className="grid grid-cols-1 flex-1 items-center gap-10 py-10 lg:grid-cols-12 lg:gap-6 lg:py-6">
           <div className="lg:col-span-7">
+            {/* Each role carries a leading sparkle. The row is shifted left by one sparkle inside a clipping
+                wrapper, so whichever sparkle starts a line is cut off and lines never begin with a separator. */}
             <motion.p
               variants={fadeUp}
               custom={0.08}
-              className="mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted max-[359px]:tracking-[0.12em] sm:mb-7 sm:tracking-[0.3em]"
+              className="mb-5 overflow-hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/80 max-[359px]:tracking-[0.12em] sm:mb-7 sm:tracking-[0.3em]"
             >
-              <span className="text-ember">{site.roles[0]}</span> &amp; {site.roles[1]}
+              <span className="-ml-6 flex flex-wrap gap-y-1.5">
+                {site.roles.map((role) => (
+                  <span key={role} className="flex items-center whitespace-nowrap">
+                    <span aria-hidden="true" className="grid w-6 shrink-0 place-items-center">
+                      <Sparkle className="size-2 text-ember" />
+                    </span>
+                    {role}
+                  </span>
+                ))}
+              </span>
             </motion.p>
 
             <h1 className="sr-only">
@@ -216,7 +227,7 @@ export function Hero() {
 
             <motion.p variants={fadeUp} custom={0.48} className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
               Based in Dhaka, Bangladesh, I turn business requirements into production ready platforms with
-              product strategy, full stack engineering, data analysis and applied AI.
+              product management, full stack engineering, data analysis and applied AI.
             </motion.p>
 
             <motion.div variants={fadeUp} custom={0.56} className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">

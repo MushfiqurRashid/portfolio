@@ -16,9 +16,9 @@ export const site = {
   phone: "+8801720097317",
   phoneDisplay: "+880 1720 097317",
   cv: "/cv/Md_Mushfiqur_Rashid_Marmo_CV.pdf",
-  title: "Mushfiqur Rashid | Software Engineer & Data Analyst in Bangladesh",
+  title: "Mushfiqur Rashid | Software Engineer, Data Analyst & Product Manager in Bangladesh",
   description:
-    "Mushfiqur Rashid is a software engineer and data analyst in Dhaka, Bangladesh. Full stack web platforms, machine learning and AI products, shipped to production.",
+    "Mushfiqur Rashid is a software engineer, data analyst and product manager in Dhaka, Bangladesh, shipping full stack platforms, machine learning and AI products.",
   socials: {
     github: "https://github.com/MushfiqurRashid",
     linkedin: "https://www.linkedin.com/in/mushfiqur-rashid-5a8583238",
@@ -62,13 +62,13 @@ export const marqueeItems = [
 
 // Words wrapped in *asterisks* are highlighted.
 export const aboutText =
-  "I'm a *software engineer* and *data analyst* from Dhaka, Bangladesh, working where product thinking meets engineering. I turn business requirements into clear specs, build the platforms myself, ship them to production and keep them running. From ecommerce and capital markets to agritech, I bring full stack craft and *applied AI* to products people actually use.";
+  "I'm a *software engineer,* *data analyst* and *product manager* from Dhaka, Bangladesh. I turn business requirements into clear specs, build the platforms myself, ship them to production and keep them running. From ecommerce and capital markets to agritech, I bring product thinking, full stack craft and applied AI to products people actually use.";
 
 export const pillars = [
   {
-    title: "Product & Program",
+    title: "Product Management",
     body: "I translate business requirements into specs, roadmaps and development tasks, and keep stakeholders aligned from kickoff to launch.",
-    tags: ["Requirements", "Roadmaps", "Stakeholders"],
+    tags: ["Roadmaps", "Requirements", "Stakeholders"],
   },
   {
     title: "Full Stack Engineering",
@@ -363,7 +363,7 @@ export const recognition = {
 
 export const toolkit = [
   {
-    title: "Product & Program",
+    title: "Product Management",
     items: [
       "Product Management",
       "Program Management",

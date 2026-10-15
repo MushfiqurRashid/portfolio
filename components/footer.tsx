@@ -23,8 +23,8 @@ export function Footer() {
               Building products people <span className="font-serif font-normal italic text-gradient">actually use.</span>
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Software engineer and data analyst based in {site.location}. Designed &amp; built by {site.shortName} with
-              Next.js, Motion and Tailwind CSS.
+              Software engineer, data analyst and product manager based in {site.location}. Designed &amp; built by{" "}
+              {site.shortName} with Next.js, Motion and Tailwind CSS.
             </p>
           </div>
 
