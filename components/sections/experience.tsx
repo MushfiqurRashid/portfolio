@@ -18,10 +18,10 @@ export function Experience() {
           index="03"
           label="Experience"
           title="Where I've *built* & led"
-          intro="From co-founding an agritech startup to leading product and technology for a capital-markets group."
+          intro="From cofounding an agritech startup to leading product and technology for a capital markets group."
         />
 
-        <div className="mt-14 border-t border-line sm:mt-20">
+        <div className="mt-10 border-t border-line sm:mt-20">
           {experience.map((job, i) => {
             const isOpen = open === i;
             return (
@@ -40,12 +40,12 @@ export function Experience() {
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     aria-controls={`job-${i}`}
-                    className="relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-2 px-1 py-7 text-left sm:px-4 sm:py-9 lg:grid-cols-12"
+                    className="relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 px-1 py-6 text-left transition-[scale] duration-300 ease-out-expo active:scale-[0.99] sm:gap-x-6 sm:px-4 sm:py-9 lg:grid-cols-12"
                   >
-                    <span className="col-span-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted lg:col-span-3">
+                    <span className="col-span-1 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted lg:col-span-3 lg:block">
                       {job.period}
                       {job.current && (
-                        <span className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[9.5px] text-emerald-300">
+                        <span className="inline-flex items-center gap-1.5 rounded-full lg:ml-3 bg-emerald-400/10 px-2 py-0.5 text-[9.5px] text-emerald-300">
                           <span className="size-1.5 animate-pulse rounded-full bg-emerald-400" />
                           Now
                         </span>
@@ -77,7 +77,7 @@ export function Experience() {
                         transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
                         className="relative overflow-hidden"
                       >
-                        <div className="grid grid-cols-1 gap-8 px-1 pb-10 sm:px-4 lg:grid-cols-12">
+                        <div className="grid grid-cols-1 gap-6 px-1 pb-9 sm:gap-8 sm:px-4 sm:pb-10 lg:grid-cols-12">
                           <div className="lg:col-span-3">
                             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dim">{job.type}</p>
                             {job.url && (
@@ -93,7 +93,7 @@ export function Experience() {
                             )}
                           </div>
                           <div className="lg:col-span-8 lg:col-start-4">
-                            <p className="max-w-2xl text-lg leading-relaxed text-cream/90">{job.summary}</p>
+                            <p className="max-w-2xl text-base leading-relaxed text-cream/90 sm:text-lg">{job.summary}</p>
                             <ul className="mt-6 grid gap-3">
                               {job.highlights.map((h, j) => (
                                 <motion.li
@@ -101,9 +101,9 @@ export function Experience() {
                                   initial={{ opacity: 0, transform: "translateX(-12px)" }}
                                   animate={{ opacity: 1, transform: "translateX(0px)" }}
                                   transition={{ duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.1 + j * 0.05 }}
-                                  className="flex gap-4 text-[15px] leading-relaxed text-muted"
+                                  className="flex gap-3.5 text-[15px] leading-relaxed text-muted"
                                 >
-                                  <span className="mt-[0.7em] h-px w-4 shrink-0 bg-ember" />
+                                  <span className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-ember" />
                                   {h}
                                 </motion.li>
                               ))}

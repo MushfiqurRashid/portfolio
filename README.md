@@ -43,6 +43,7 @@ All text lives in [`lib/data.ts`](lib/data.ts): experience, products, projects, 
    ```
 2. On [vercel.com/new](https://vercel.com/new), import the repository. The defaults are correct (Framework: Next.js, no environment variables required) — click **Deploy**.
 3. Optional: add a custom domain under **Project → Settings → Domains**, then set `NEXT_PUBLIC_SITE_URL=https://your-domain.com` in **Settings → Environment Variables** and redeploy so canonical URLs, the sitemap and social previews use your domain. Without it, the Vercel production URL is used automatically.
+4. Optional: to verify the site in [Google Search Console](https://search.google.com/search-console) with the "HTML tag" method, set `GOOGLE_SITE_VERIFICATION` to the token Google gives you (just the `content` value) and redeploy. Then submit `/sitemap.xml` there.
 
 ## Structure
 

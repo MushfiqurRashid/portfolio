@@ -37,7 +37,7 @@ export function PillLink({
     <a
       href={href}
       className={cn(
-        "group relative inline-flex h-12 items-center gap-3 overflow-hidden rounded-full pl-6 text-sm font-medium tracking-tight transition-colors duration-500",
+        "group relative inline-flex h-12 items-center gap-3 overflow-hidden rounded-full pl-6 text-sm font-medium tracking-tight [transition:color_0.5s,background-color_0.5s,scale_0.25s_cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97]",
         icon ? "pr-1.5" : "pr-6",
         v.root,
         className,

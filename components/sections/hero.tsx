@@ -19,6 +19,7 @@ import { ArrowUpRight, Download, GitHub, LinkedIn, Mail, Sparkle, Trophy } from 
 import { heroRoles, site } from "@/lib/data";
 import { LocalTime } from "@/components/ui/local-time";
 import { EASE_OUT_EXPO } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/hooks";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, transform: "translateY(24px)" },
@@ -98,6 +99,9 @@ function RotatingBadge() {
 export function Hero() {
   const { ready, scrollTo } = useApp();
   const sectionRef = useRef<HTMLElement>(null);
+  // On phones the hero is taller than the screen, so fading it on scroll would hide the portrait
+  // and links before anyone reaches them. The scroll-out effect is for large screens only.
+  const desktop = useMediaQuery("(min-width: 1024px)");
 
   // Scroll-linked depth
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
@@ -147,37 +151,45 @@ export function Hero() {
       <motion.div
         initial="hidden"
         animate={state}
-        style={{ y: contentY, opacity: fade }}
+        style={desktop ? { y: contentY, opacity: fade } : undefined}
         className="container-x flex will-change-[transform,opacity] flex-1 flex-col pb-8 pt-24 sm:pt-28 lg:pb-10 lg:pt-28"
       >
         {/* Meta row */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-3">
           <motion.div variants={fadeUp} custom={0.05} className="glass inline-flex items-center gap-2.5 rounded-full py-2 pl-3 pr-4">
             <span className="relative flex size-2">
               <span className="absolute inset-0 rounded-full bg-emerald-400 animate-pulse-ring" />
               <span className="relative size-2 rounded-full bg-emerald-400" />
             </span>
-            <span className="text-xs font-medium text-cream/90">Open to new opportunities</span>
+            <span className="whitespace-nowrap text-xs font-medium text-cream/90">Open to new opportunities</span>
           </motion.div>
-          <motion.p variants={fadeUp} custom={0.1} className="hidden text-right font-mono text-[11px] uppercase tracking-[0.25em] text-muted sm:block">
-            Dhaka, BD <span className="text-dim">/</span>{" "}
-            <LocalTime className="text-cream tabular-nums" /> GMT+6
+          <motion.p
+            variants={fadeUp}
+            custom={0.1}
+            className="whitespace-nowrap text-right font-mono text-[11px] uppercase tracking-[0.16em] text-muted max-[359px]:hidden sm:tracking-[0.25em]"
+          >
+            Dhaka<span className="hidden sm:inline">, BD</span> <span className="text-dim">/</span>{" "}
+            <LocalTime className="text-cream tabular-nums" /><span className="hidden sm:inline"> GMT+6</span>
           </motion.p>
         </div>
 
         {/* Main */}
         <div className="grid grid-cols-1 flex-1 items-center gap-10 py-10 lg:grid-cols-12 lg:gap-6 lg:py-6">
           <div className="lg:col-span-7">
-            <motion.p variants={fadeUp} custom={0.08} className="mb-5 font-mono text-[11px] uppercase tracking-[0.3em] text-muted sm:mb-7">
-              <span className="text-ember">{site.role}</span> — @ {site.company}
+            <motion.p
+              variants={fadeUp}
+              custom={0.08}
+              className="mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted max-[359px]:tracking-[0.12em] sm:mb-7 sm:tracking-[0.3em]"
+            >
+              <span className="text-ember">{site.roles[0]}</span> &amp; {site.roles[1]}
             </motion.p>
 
             <h1 className="sr-only">
-              {site.name} — {site.headline}
+              {site.shortName}, {site.headline}
             </h1>
             <div
               aria-hidden="true"
-              className="text-[clamp(3.4rem,9.4vw,9.25rem)] font-semibold uppercase leading-[0.86] tracking-[-0.05em]"
+              className="text-[14.5vw] font-semibold uppercase leading-[0.86] tracking-[-0.05em] lg:text-[clamp(3.4rem,9.4vw,9.25rem)]"
             >
               <NameLine text={site.firstName} delay={0.1} />
               <span className="flex items-center gap-[0.18em]">
@@ -197,21 +209,22 @@ export function Hero() {
             <motion.p
               variants={fadeUp}
               custom={0.4}
-              className="mt-7 text-[clamp(1.35rem,2.4vw,2.1rem)] font-medium leading-tight tracking-[-0.02em] sm:mt-9"
+              className="mt-6 text-[clamp(1.35rem,2.4vw,2.1rem)] font-medium leading-tight tracking-[-0.02em] sm:mt-9"
             >
               I design &amp; ship <RotatingRole active={ready} />
             </motion.p>
 
             <motion.p variants={fadeUp} custom={0.48} className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
-              I turn business requirements into production-ready platforms — bridging product strategy,
-              full-stack engineering and applied AI, from first spec to live deployment.
+              Based in Dhaka, Bangladesh, I turn business requirements into production ready platforms with
+              product strategy, full stack engineering, data analysis and applied AI.
             </motion.p>
 
             <motion.div variants={fadeUp} custom={0.56} className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
-              <Magnetic>
+              <Magnetic className="min-w-[10.5rem] flex-1 sm:flex-none">
                 <PillLink
                   href="#work"
                   icon={<ArrowUpRight />}
+                  className="w-full justify-between sm:w-auto sm:justify-start"
                   onClick={(e) => {
                     e.preventDefault();
                     scrollTo("#work");
@@ -220,8 +233,14 @@ export function Hero() {
                   View my work
                 </PillLink>
               </Magnetic>
-              <Magnetic>
-                <PillLink href={site.cv} variant="ghost" icon={<Download />} download>
+              <Magnetic className="min-w-[10.5rem] flex-1 sm:flex-none">
+                <PillLink
+                  href={site.cv}
+                  variant="ghost"
+                  icon={<Download />}
+                  download
+                  className="w-full justify-between sm:w-auto sm:justify-start"
+                >
                   Download CV
                 </PillLink>
               </Magnetic>
@@ -285,7 +304,7 @@ export function Hero() {
               >
                 <Image
                   src={portrait}
-                  alt={`Portrait of ${site.name}`}
+                  alt={`${site.shortName}, software engineer and data analyst in Dhaka, Bangladesh`}
                   fill
                   preload
                   quality={90}
@@ -307,7 +326,7 @@ export function Hero() {
                     </span>
                     <span className="leading-tight">
                       <span className="block font-mono text-[9.5px] uppercase tracking-[0.2em] text-muted">NASA Space Apps</span>
-                      <span className="block text-[13px] font-medium">Global 2nd Runner-Up</span>
+                      <span className="block text-[13px] font-medium">Global 2nd Runner Up</span>
                     </span>
                   </div>
                 </motion.div>
@@ -340,11 +359,11 @@ export function Hero() {
         </div>
 
         {/* Bottom row */}
-        <motion.div variants={fadeUp} custom={0.65} className="flex items-end justify-between gap-6">
+        <motion.div variants={fadeUp} custom={0.65} className="flex items-end justify-center gap-6 sm:justify-between">
           <button
             type="button"
             onClick={() => scrollTo("#about")}
-            className="group flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.3em] text-muted transition-colors hover:text-cream"
+            className="group hidden items-center gap-4 font-mono text-[11px] uppercase tracking-[0.3em] text-muted transition-colors hover:text-cream sm:flex"
           >
             <span className="relative block h-12 w-px overflow-hidden bg-line-strong">
               <span className="absolute inset-0 bg-ember animate-scroll-line" />

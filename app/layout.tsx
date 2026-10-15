@@ -18,60 +18,131 @@ const serif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
-const title = `${site.name} — ${site.role}`;
+const url = siteUrl();
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl()),
-  title: { default: title, template: `%s — ${site.shortName}` },
+  metadataBase: new URL(url),
+  title: { default: site.title, template: `%s | ${site.shortName}` },
   description: site.description,
   applicationName: site.shortName,
-  authors: [{ name: site.name, url: site.socials.linkedin }],
+  authors: [{ name: site.name, url }],
   creator: site.name,
+  publisher: site.name,
+  category: "technology",
   keywords: [
     "Mushfiqur Rashid",
     "Mushfiqur Rashid Marmo",
-    "Product Manager",
-    "Full-Stack Developer",
+    "Md. Mushfiqur Rashid Marmo",
+    "Software Engineer in Bangladesh",
+    "Data Analyst in Bangladesh",
+    "Software Engineer Dhaka",
+    "Data Analyst Dhaka",
+    "Full Stack Developer Bangladesh",
+    "Machine Learning Engineer Bangladesh",
+    "Product Manager Bangladesh",
     "AI Engineer",
-    "Machine Learning",
-    "Next.js",
+    "Next.js Developer",
+    "Python",
+    "SQL",
+    "North South University",
     "Dhaka",
     "Bangladesh",
-    "Portfolio",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "profile",
     url: "/",
-    siteName: site.name,
-    title,
+    siteName: site.shortName,
+    title: site.title,
     description: site.description,
     locale: "en_US",
     firstName: site.firstName,
     lastName: site.lastName,
   },
-  twitter: { card: "summary_large_image", title, description: site.description },
-  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  // Set GOOGLE_SITE_VERIFICATION to the token from Google Search Console to verify ownership.
+  verification: googleVerification ? { google: googleVerification } : undefined,
+  appleWebApp: { capable: true, title: site.shortName, statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
   themeColor: "#09090b",
   colorScheme: "dark",
+  // Lets the page paint under the notch and home indicator; safe-area insets keep content clear of them.
+  viewportFit: "cover",
 };
+
+const personId = `${url}/#person`;
+const websiteId = `${url}/#website`;
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  alternateName: site.shortName,
-  jobTitle: site.role,
-  worksFor: { "@type": "Organization", name: site.company, url: experience[0].url },
-  alumniOf: { "@type": "CollegeOrUniversity", name: "North South University" },
-  address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
-  email: `mailto:${site.email}`,
-  url: siteUrl(),
-  sameAs: [site.socials.github, site.socials.linkedin],
-  knowsAbout: ["Product Management", "Full-Stack Development", "Machine Learning", "Retrieval-Augmented Generation", "Next.js"],
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url,
+      name: site.shortName,
+      alternateName: [site.name, "Mushfiqur Rashid Marmo"],
+      inLanguage: "en",
+      publisher: { "@id": personId },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${url}/#profile`,
+      url,
+      name: site.title,
+      description: site.description,
+      inLanguage: "en",
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: site.name,
+      alternateName: [site.shortName, "Mushfiqur Rashid Marmo", "Marmo"],
+      givenName: site.firstName,
+      familyName: site.lastName,
+      jobTitle: [...site.roles],
+      hasOccupation: site.roles.map((name) => ({
+        "@type": "Occupation",
+        name,
+        occupationLocation: { "@type": "Country", name: "Bangladesh" },
+      })),
+      description: site.description,
+      image: `${url}/images/portrait.png`,
+      url,
+      email: `mailto:${site.email}`,
+      telephone: site.phone,
+      worksFor: { "@type": "Organization", name: site.company, url: experience[0].url },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "North South University", address: "Dhaka, Bangladesh" },
+      address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
+      homeLocation: { "@type": "Place", name: site.location },
+      nationality: { "@type": "Country", name: "Bangladesh" },
+      sameAs: [site.socials.github, site.socials.linkedin],
+      knowsAbout: [
+        "Software Engineering",
+        "Data Analysis",
+        "Full Stack Development",
+        "Product Management",
+        "Machine Learning",
+        "Retrieval Augmented Generation",
+        "Natural Language Processing",
+        "Python",
+        "SQL",
+        "Next.js",
+        "React",
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

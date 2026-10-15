@@ -88,13 +88,25 @@
   margin-inline: auto;
   width: 100%;
   max-width: 1440px;
-  padding-inline: 1.25rem;
+  /* Never narrower than the notch / rounded corners on a phone held sideways. */
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
 
   @media (width >= 40rem) {
-    padding-inline: 2rem;
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
   }
   @media (width >= 64rem) {
-    padding-inline: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -137,6 +149,13 @@
     color-scheme: dark;
     background-color: var(--color-ink);
     -webkit-text-size-adjust: 100%;
+    /* Touch feedback comes from our own pressed states, not the grey system flash. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
   }
 
   body {
@@ -293,6 +312,16 @@ html:not([data-hydrated])
 @media (pointer: coarse) {
   .cursor-layer {
     display: none !important;
+  }
+}
+
+/* Touch screens never hover, so spotlight cards keep a soft glow along their top edge instead. */
+@media (hover: none) {
+  .spotlight-glow {
+    opacity: 0.55;
+  }
+  .spotlight-rim {
+    opacity: 0.35;
   }
 }
 

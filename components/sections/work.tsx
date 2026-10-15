@@ -146,9 +146,9 @@ function WorkCard({
   const live = item.status === "Live";
 
   return (
-    <div ref={ref} className="mb-6 lg:sticky lg:top-0 lg:mb-0 lg:flex lg:h-svh lg:items-center">
+    <div ref={ref} className="mb-4 sm:mb-6 lg:sticky lg:top-0 lg:mb-0 lg:flex lg:h-svh lg:items-center">
       <motion.article
-        className="relative w-full origin-top overflow-hidden rounded-[28px] border border-white/10 lg:rounded-[36px] lg:will-change-transform"
+        className="relative w-full origin-top overflow-hidden rounded-3xl border sm:rounded-[28px] border-white/10 lg:rounded-[36px] lg:will-change-transform"
         style={{
           scale: stack ? scale : 1,
           top: stack ? `calc(-3vh + ${index * 26}px)` : undefined,
@@ -160,14 +160,13 @@ function WorkCard({
           className="pointer-events-none absolute -right-[15%] -top-[45%] aspect-square w-[75%] rounded-full"
           style={{ background: `radial-gradient(closest-side, ${item.accent}38, transparent)` }}
         />
-        <div className="relative grid grid-cols-1 gap-8 p-6 sm:p-10 lg:min-h-[min(78vh,720px)] lg:grid-cols-12 lg:gap-10 lg:p-12">
+        <div className="relative grid grid-cols-1 gap-7 p-5 sm:gap-8 sm:p-10 lg:min-h-[min(78vh,720px)] lg:grid-cols-12 lg:gap-10 lg:p-12">
           <div className="flex flex-col lg:col-span-5">
-            <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted sm:tracking-[0.2em]">
               <span className="text-cream">
                 {String(index + 1).padStart(2, "0")}
                 <span className="text-dim"> / {String(total).padStart(2, "0")}</span>
               </span>
-              <span className="h-px w-6 bg-line-strong" />
               <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px]">
                 <span className={`size-1.5 rounded-full ${live ? "bg-emerald-400" : "bg-amber"}`} />
                 {item.status}
@@ -175,10 +174,10 @@ function WorkCard({
               <span>{item.year}</span>
             </div>
 
-            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.25em] lg:mt-auto" style={{ color: item.accent }}>
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.25em] sm:mt-8 lg:mt-auto" style={{ color: item.accent }}>
               {item.category}
             </p>
-            <h3 className="mt-3 text-[clamp(2.4rem,5vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
+            <h3 className="mt-3 text-[clamp(2.25rem,5vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
               {item.title}
             </h3>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/70 sm:text-base">{item.description}</p>
@@ -186,7 +185,7 @@ function WorkCard({
             <ul className="mt-6 space-y-2.5">
               {item.highlights.map((h) => (
                 <li key={h} className="flex gap-3 text-sm leading-snug text-cream/80">
-                  <span className="mt-[0.55em] h-px w-3 shrink-0" style={{ background: item.accent }} />
+                  <span className="mt-[0.45em] size-1.5 shrink-0 rounded-full" style={{ background: item.accent }} />
                   {h}
                 </li>
               ))}
@@ -200,7 +199,7 @@ function WorkCard({
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 lg:mt-10">
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-5 lg:mt-10">
               {item.url ? (
                 <PillLink href={item.url} target="_blank" rel="noreferrer" variant="ghost" icon={<ArrowUpRight />}>
                   Visit live site
@@ -210,8 +209,9 @@ function WorkCard({
                   Launching soon
                 </span>
               )}
-              <span className="text-xs text-muted">
-                Role — <span className="text-cream/85">{item.role}</span>
+              <span className="flex flex-col gap-1">
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-dim">Role</span>
+                <span className="text-sm text-cream/85">{item.role}</span>
               </span>
             </div>
           </div>
@@ -239,10 +239,10 @@ export function Work() {
           index="02"
           label="Selected work"
           title="Products I've *shipped*"
-          intro="Real platforms running in production — taken from requirements and specs through build, deployment, DNS and day-two operations."
+          intro="Real platforms running in production, taken from requirements and specs through build, deployment, DNS and day two operations."
         />
       </div>
-      <div ref={containerRef} className="container-x mt-14 sm:mt-20 lg:mt-10">
+      <div ref={containerRef} className="container-x mt-10 sm:mt-20 lg:mt-10">
         {work.map((item, i) => (
           <WorkCard
             key={item.slug}

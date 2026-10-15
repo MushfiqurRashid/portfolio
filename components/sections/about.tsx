@@ -2,6 +2,8 @@ import { Counter } from "@/components/ui/counter";
 import { Reveal, ScrollRevealParagraph } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { swipeItem } from "@/components/ui/swipe-item";
+import { SwipeRow } from "@/components/ui/swipe-row";
 import { aboutText, pillars, site, stats } from "@/lib/data";
 
 const pillarIcons = [
@@ -33,34 +35,36 @@ export function About() {
   return (
     <section id="about" className="relative py-20 sm:py-28 lg:py-32">
       <div className="container-x">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <Reveal>
-              <SectionLabel index="01">About</SectionLabel>
-            </Reveal>
-            <Reveal delay={0.1} className="mt-10 hidden space-y-5 lg:block">
-              {[
-                ["Based in", site.location],
-                ["Education", "B.Sc. CSE, North South University"],
-                ["Languages", "Bangla, English"],
-              ].map(([k, v]) => (
-                <div key={k} className="border-t border-line pt-4">
-                  <p className="font-mono text-[10.5px] uppercase tracking-[0.25em] text-dim">{k}</p>
-                  <p className="mt-1.5 text-sm text-cream/85">{v}</p>
-                </div>
-              ))}
-            </Reveal>
-          </div>
-          <div className="lg:col-span-9">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+          <Reveal className="lg:col-span-3">
+            <SectionLabel index="01">About</SectionLabel>
+          </Reveal>
+          <div className="lg:col-span-9 lg:row-span-2">
             <ScrollRevealParagraph
               text={aboutText}
-              className="text-[clamp(1.75rem,3.6vw,3.4rem)] font-medium leading-[1.12] tracking-[-0.035em]"
+              className="text-[clamp(1.6rem,3.6vw,3.4rem)] font-medium leading-[1.14] tracking-[-0.035em]"
             />
           </div>
+          {/* Phones: a compact fact list after the paragraph. Desktop: stacked under the label. */}
+          <Reveal delay={0.1} className="lg:col-span-3 lg:row-start-2 lg:space-y-5">
+            {[
+              ["Based in", site.location],
+              ["Education", "B.Sc. CSE, North South University"],
+              ["Languages", "Bangla, English"],
+            ].map(([k, v]) => (
+              <div
+                key={k}
+                className="flex items-baseline justify-between gap-6 border-t border-line py-3.5 last:border-b lg:block lg:py-0 lg:pt-4 lg:last:border-b-0"
+              >
+                <p className="shrink-0 font-mono text-[10.5px] uppercase tracking-[0.25em] text-dim">{k}</p>
+                <p className="text-right text-sm text-cream/85 lg:mt-1.5 lg:text-left">{v}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
 
         {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 border-t border-line sm:mt-28 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 border-t border-line sm:mt-28 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal
               key={s.label}
@@ -77,17 +81,17 @@ export function About() {
         </div>
 
         {/* Pillars */}
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-3">
+        <SwipeRow label="Focus areas" until="lg" className="mt-14 sm:mt-20 lg:grid-cols-3">
           {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.1}>
-              <SpotlightCard className="h-full p-7 sm:p-9">
+            <Reveal key={p.title} delay={i * 0.1} className={swipeItem.lg}>
+              <SpotlightCard className="h-full p-6 sm:p-9">
                 <div className="flex items-start justify-between">
                   <span className="text-ember transition-transform duration-700 ease-out-expo group-hover/spot:rotate-12 group-hover/spot:scale-110">
                     {pillarIcons[i]}
                   </span>
                   <span className="font-mono text-xs text-dim">0{i + 1}</span>
                 </div>
-                <h3 className="mt-12 text-2xl font-semibold tracking-[-0.03em] sm:text-[1.7rem]">{p.title}</h3>
+                <h3 className="mt-10 text-2xl sm:mt-12 font-semibold tracking-[-0.03em] sm:text-[1.7rem]">{p.title}</h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-muted">{p.body}</p>
                 <div className="mt-8 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
@@ -99,7 +103,7 @@ export function About() {
               </SpotlightCard>
             </Reveal>
           ))}
-        </div>
+        </SwipeRow>
       </div>
     </section>
   );

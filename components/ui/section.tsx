@@ -5,7 +5,7 @@ export function SectionLabel({ index, children, className }: { index: string; ch
   return (
     <div className={cn("flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-muted", className)}>
       <span className="text-ember">({index})</span>
-      <span className="h-px w-10 bg-line-strong" />
+      <span className="size-1 rounded-full bg-muted/60" />
       <span>{children}</span>
     </div>
   );

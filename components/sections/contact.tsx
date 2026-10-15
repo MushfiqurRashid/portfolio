@@ -28,7 +28,7 @@ export function Contact() {
 
   const channels = [
     { label: "Phone", value: site.phoneDisplay, href: `tel:${site.phone}`, icon: <Phone className="size-5" /> },
-    { label: "LinkedIn", value: "in/mushfiqur-rashid", href: site.socials.linkedin, icon: <LinkedIn className="size-[18px]" /> },
+    { label: "LinkedIn", value: site.shortName, href: site.socials.linkedin, icon: <LinkedIn className="size-[18px]" /> },
     { label: "GitHub", value: "@MushfiqurRashid", href: site.socials.github, icon: <GitHub className="size-5" /> },
     {
       label: "Location",
@@ -70,12 +70,12 @@ export function Contact() {
 
         <Reveal delay={0.25}>
           <p className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-muted sm:text-lg">
-            Open to product, technology and AI roles, collaborations and freelance builds. The fastest way to reach me
-            is email.
+            Open to software engineering, data and product roles, collaborations and freelance builds. The fastest
+            way to reach me is email.
           </p>
         </Reveal>
 
-        <Reveal delay={0.3} className="mt-12 flex flex-col items-center gap-6 sm:mt-16">
+        <Reveal delay={0.3} className="mt-10 flex flex-col items-center gap-6 sm:mt-16">
           <div className="flex max-w-full items-center gap-3 sm:gap-5">
             <a
               href={`mailto:${site.email}`}
@@ -110,39 +110,42 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            <Magnetic>
-              <PillLink href={`mailto:${site.email}`} icon={<Mail />}>
+          <div className="flex w-full flex-wrap justify-center gap-3 sm:w-auto">
+            <Magnetic className="min-w-[10.5rem] flex-1 sm:flex-none">
+              <PillLink href={`mailto:${site.email}`} icon={<Mail />} className="w-full justify-between sm:w-auto sm:justify-start">
                 Send an email
               </PillLink>
             </Magnetic>
-            <Magnetic>
-              <PillLink href={site.cv} variant="ghost" icon={<Download />} download>
+            <Magnetic className="min-w-[10.5rem] flex-1 sm:flex-none">
+              <PillLink href={site.cv} variant="ghost" icon={<Download />} download className="w-full justify-between sm:w-auto sm:justify-start">
                 Download CV
               </PillLink>
             </Magnetic>
           </div>
         </Reveal>
 
-        <div className="mt-20 grid grid-cols-1 gap-3 sm:mt-28 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-2.5 sm:mt-28 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
           {channels.map((c, i) => {
             const body = (
               <>
-                <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-full border border-line text-cream/85 transition-colors duration-500 group-hover:border-ember/50 group-hover:text-ember">
+                {/* Phones: a compact row (icon, text, arrow). Larger screens: a tall card. */}
+                <div className="flex items-center gap-4 sm:block">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-cream/85 transition-colors duration-500 group-hover:border-ember/50 group-hover:text-ember">
                     {c.icon}
                   </span>
+                  <div className="min-w-0 flex-1 sm:mt-8">
+                    <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-dim">{c.label}</p>
+                    <p className="mt-1 truncate text-[15px] font-medium text-cream/90 sm:mt-1.5 sm:text-base">{c.value}</p>
+                    {c.detail && <p className="mt-0.5 text-xs tabular-nums text-muted">{c.detail}</p>}
+                  </div>
                   {c.href && (
-                    <ArrowUpRight className="size-5 text-muted transition-all duration-500 ease-out-expo group-hover:rotate-45 group-hover:text-ember" />
+                    <ArrowUpRight className="size-5 shrink-0 text-muted transition-all duration-500 ease-out-expo group-hover:rotate-45 group-hover:text-ember sm:absolute sm:right-6 sm:top-9" />
                   )}
                 </div>
-                <p className="mt-8 font-mono text-[10.5px] uppercase tracking-[0.22em] text-dim">{c.label}</p>
-                <p className="mt-1.5 truncate text-base font-medium text-cream/90">{c.value}</p>
-                {c.detail && <p className="mt-0.5 text-xs tabular-nums text-muted">{c.detail}</p>}
               </>
             );
             const cls =
-              "group block h-full rounded-3xl border border-line bg-surface/70 p-6 transition-colors duration-500 hover:border-line-strong hover:bg-surface";
+              "group relative block h-full rounded-2xl border border-line bg-surface/70 p-4 transition-[color,background-color,border-color,scale] duration-500 hover:border-line-strong hover:bg-surface active:scale-[0.98] active:duration-150 sm:rounded-3xl sm:p-6";
             return (
               <Reveal key={c.label} delay={i * 0.06}>
                 {c.href ? (

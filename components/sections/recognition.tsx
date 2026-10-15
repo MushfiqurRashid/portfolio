@@ -21,13 +21,13 @@ export function Recognition() {
           index="05"
           label="Leadership & research"
           title="Recognition & *research*"
-          intro="Leading teams under pressure — from a 48-hour NASA build to a two-year study on how AI models represent Bangladeshi culture."
+          intro="Leading teams under pressure, from a 48 hour NASA build to a two year study on how AI models represent Bangladeshi culture."
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:mt-20 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-3 sm:mt-20 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
           {/* NASA */}
           <Reveal className="md:col-span-2 lg:row-span-2">
-            <SpotlightCard className="flex h-full min-h-[480px] flex-col p-7 sm:p-10" glow="255,181,71">
+            <SpotlightCard className="flex h-full min-h-[440px] flex-col p-6 sm:min-h-[480px] sm:p-10" glow="255,181,71">
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                 {STARS.map(([x, y], i) => (
                   <span
@@ -60,7 +60,7 @@ export function Recognition() {
                 <Label>{nasa.date}</Label>
               </div>
 
-              <div className="mt-auto pt-16">
+              <div className="mt-auto pt-12 sm:pt-16">
                 <Label>Space Apps · Global</Label>
                 <p className="mt-2 flex items-start text-[clamp(6rem,14vw,10.5rem)] font-semibold leading-[0.8] tracking-[-0.07em]">
                   2<span className="mt-[0.1em] text-[0.32em] tracking-[-0.03em] text-gradient">nd</span>
@@ -68,16 +68,23 @@ export function Recognition() {
                 <p className="mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">{nasa.award}</p>
                 <p className="mt-1 text-base text-cream/80">{nasa.title}</p>
                 <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted">{nasa.body}</p>
-                <p className="mt-6 inline-flex rounded-full border border-line px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-cream/75">
-                  {nasa.meta}
-                </p>
+                <ul className="mt-6 flex flex-wrap gap-1.5">
+                  {nasa.meta.split(" · ").map((m) => (
+                    <li
+                      key={m}
+                      className="rounded-full border border-line px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-cream/75"
+                    >
+                      {m}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </SpotlightCard>
           </Reveal>
 
           {/* LLM research */}
           <Reveal className="md:col-span-2" delay={0.08}>
-            <SpotlightCard className="grid grid-cols-1 h-full gap-6 p-7 sm:grid-cols-[1fr_auto] sm:p-8" glow="124,92,255">
+            <SpotlightCard className="grid grid-cols-1 h-full gap-6 p-6 sm:grid-cols-[1fr_auto] sm:p-8" glow="124,92,255">
               <div>
                 <Label>
                   {research.date} · {research.meta}
@@ -91,7 +98,7 @@ export function Recognition() {
               >
                 <span className="text-violet">prompt</span>_142 = {"{"}
                 {"\n"}  <span className="text-amber">&quot;culture&quot;</span>: &quot;Pohela Boishakh&quot;,
-                {"\n"}  <span className="text-amber">&quot;task&quot;</span>: &quot;text-to-image&quot;,
+                {"\n"}  <span className="text-amber">&quot;task&quot;</span>: &quot;txt2img&quot;,
                 {"\n"}  <span className="text-amber">&quot;eval&quot;</span>: &quot;representation&quot;
                 {"\n"}{"}"}  <span className="text-dim"># 1 of 200+</span>
               </pre>
@@ -100,8 +107,8 @@ export function Recognition() {
 
           {/* Publication */}
           <Reveal className="md:col-span-2" delay={0.12}>
-            <SpotlightCard className="flex h-full flex-col p-7 sm:p-8">
-              <div className="flex items-center justify-between gap-4">
+            <SpotlightCard className="flex h-full flex-col p-6 sm:p-8">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <Label>Publication</Label>
                 <span className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-amber">
                   <span className="size-1.5 animate-pulse rounded-full bg-amber" />
@@ -116,7 +123,7 @@ export function Recognition() {
 
           {/* Education */}
           <Reveal className="md:col-span-2" delay={0.08}>
-            <SpotlightCard className="flex h-full items-center gap-6 p-7 sm:p-8">
+            <SpotlightCard className="flex h-full items-center gap-5 p-6 sm:gap-6 sm:p-8">
               <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-line bg-white/[0.03] text-ember">
                 <svg viewBox="0 0 24 24" className="size-7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
                   <path d="M2 9.5 12 5l10 4.5-10 4.5L2 9.5Z" />
@@ -133,7 +140,7 @@ export function Recognition() {
 
           {extras.map((e, i) => (
             <Reveal key={e.title} delay={0.12 + i * 0.06}>
-              <SpotlightCard className="flex h-full flex-col justify-between gap-8 p-7">
+              <SpotlightCard className="flex h-full flex-col justify-between gap-6 p-6 sm:gap-8 sm:p-7">
                 <Sparkle className="size-5 text-ember transition-transform duration-700 ease-out-expo group-hover/spot:rotate-90" />
                 <div>
                   <Label>

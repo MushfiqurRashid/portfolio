@@ -22,24 +22,24 @@ export function SpotlightCard({
         el.style.setProperty("--y", `${e.clientY - r.top}px`);
       }}
       className={cn(
-        "group/spot relative isolate overflow-hidden rounded-[28px] border border-line bg-surface/50",
+        "group/spot relative isolate overflow-hidden rounded-[28px] border border-line bg-surface/50 transition-[scale] duration-300 ease-out-expo group-active/press:scale-[0.985]",
         className,
       )}
       {...rest}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
+        className="spotlight-glow pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
         style={{
-          background: `radial-gradient(460px circle at var(--x, 50%) var(--y, 50%), rgba(${glow},0.13), transparent 45%)`,
+          background: `radial-gradient(460px circle at var(--x, 50%) var(--y, 0%), rgba(${glow},0.13), transparent 45%)`,
         }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
+        className="spotlight-rim pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
         style={{
           padding: 1,
-          background: `radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(${glow},0.55), transparent 60%)`,
+          background: `radial-gradient(280px circle at var(--x, 50%) var(--y, 0%), rgba(${glow},0.55), transparent 60%)`,
           WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",

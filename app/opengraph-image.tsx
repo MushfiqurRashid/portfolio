@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { site } from "@/lib/data";
 
-export const alt = `${site.name} — ${site.role}`;
+export const alt = site.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -65,8 +65,8 @@ export default function Image() {
                 />
               </svg>
             </div>
-            <div style={{ marginTop: 34, fontSize: 32, color: "#efebe4" }}>{site.role}</div>
-            <div style={{ marginTop: 8, fontSize: 26, color: "#8f8d96" }}>Full-Stack Engineering · Applied AI/ML</div>
+            <div style={{ marginTop: 34, fontSize: 32, color: "#efebe4" }}>Software Engineer · Data Analyst</div>
+            <div style={{ marginTop: 8, fontSize: 26, color: "#8f8d96" }}>Product Manager, Tech · Applied AI</div>
           </div>
           <div style={{ display: "flex", gap: 28, fontSize: 22, color: "#8f8d96" }}>
             <span>{site.location}</span>

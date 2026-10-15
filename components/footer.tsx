@@ -11,25 +11,26 @@ export function Footer() {
   const year = useCurrentYear(2026);
 
   const linkCls =
-    "group inline-flex items-center text-[15px] text-cream/75 transition-colors duration-300 hover:text-cream";
+    "group inline-flex items-center py-1.5 text-[15px] text-cream/75 transition-colors duration-300 hover:text-cream";
 
   return (
     <footer className="relative overflow-hidden border-t border-line pt-16 sm:pt-20">
       <div className="container-x">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
+          <div className="col-span-2 lg:col-span-5">
             <Sparkle className="size-6 text-ember" />
             <p className="mt-6 max-w-sm text-2xl font-semibold leading-tight tracking-[-0.03em] sm:text-3xl">
               Building products people <span className="font-serif font-normal italic text-gradient">actually use.</span>
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Designed &amp; built by {site.shortName} with Next.js, Motion and Tailwind CSS. Deployed on Vercel.
+              Software engineer and data analyst based in {site.location}. Designed &amp; built by {site.shortName} with
+              Next.js, Motion and Tailwind CSS.
             </p>
           </div>
 
           <nav aria-label="Footer" className="lg:col-span-3 lg:col-start-7">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.25em] text-dim">Navigate</p>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-3.5 space-y-1">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <a
@@ -40,7 +41,7 @@ export function Footer() {
                     }}
                     className={linkCls}
                   >
-                    <span className="h-px w-0 bg-ember transition-all duration-500 ease-out-expo group-hover:mr-2 group-hover:w-4" />
+                    <span className="size-1.5 w-0 scale-0 rounded-full bg-ember transition-all duration-500 ease-out-expo group-hover:mr-2 group-hover:w-1.5 group-hover:scale-100" />
                     {l.label}
                   </a>
                 </li>
@@ -50,7 +51,7 @@ export function Footer() {
 
           <div className="lg:col-span-3">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.25em] text-dim">Connect</p>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-3.5 space-y-1">
               {[
                 { label: "GitHub", href: site.socials.github },
                 { label: "LinkedIn", href: site.socials.linkedin },
@@ -65,7 +66,7 @@ export function Footer() {
                     download={l.href === site.cv || undefined}
                     className={linkCls}
                   >
-                    <span className="h-px w-0 bg-ember transition-all duration-500 ease-out-expo group-hover:mr-2 group-hover:w-4" />
+                    <span className="size-1.5 w-0 scale-0 rounded-full bg-ember transition-all duration-500 ease-out-expo group-hover:mr-2 group-hover:w-1.5 group-hover:scale-100" />
                     {l.label}
                   </a>
                 </li>
@@ -81,7 +82,7 @@ export function Footer() {
         </p>
       </div>
 
-      <div className="container-x relative flex flex-col-reverse items-start justify-between gap-6 border-t border-line py-7 sm:flex-row sm:items-center">
+      <div className="container-x relative flex flex-col-reverse items-start justify-between gap-6 border-t border-line pb-[max(1.75rem,env(safe-area-inset-bottom))] pt-7 sm:flex-row sm:items-center">
         <p className="text-xs text-muted">
           © {year} {site.name}. All rights reserved.
         </p>
