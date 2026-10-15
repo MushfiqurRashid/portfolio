@@ -70,7 +70,7 @@ export function Contact() {
 
         <Reveal delay={0.25}>
           <p className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-muted sm:text-lg">
-            Open to software engineering, data analyst and product management roles, collaborations and freelance
+            Open to product management, data analyst and software engineering roles, collaborations and freelance
             builds. The fastest way to reach me is email.
           </p>
         </Reveal>

@@ -14,13 +14,7 @@ const pillarIcons = [
     <circle cx="24" cy="24" r="4" fill="currentColor" />
     <path d="M24 2v8M24 38v8M2 24h8M38 24h8" />
   </svg>,
-  // Engineering: brackets
-  <svg key="e" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" className="size-12">
-    <rect x="4" y="8" width="40" height="32" rx="6" opacity="0.35" />
-    <path d="M4 16h40" opacity="0.35" />
-    <path d="m18 23-5 5 5 5M30 23l5 5-5 5M26 21l-4 14" />
-  </svg>,
-  // AI: neural graph
+  // Data & AI: neural graph
   <svg key="a" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" className="size-12">
     <path d="M10 12 24 24 38 12M10 36l14-12 14 12M10 12v24M38 12v24" opacity="0.35" />
     <circle cx="10" cy="12" r="3.5" fill="var(--color-ink)" />
@@ -28,6 +22,12 @@ const pillarIcons = [
     <circle cx="10" cy="36" r="3.5" fill="var(--color-ink)" />
     <circle cx="38" cy="36" r="3.5" fill="var(--color-ink)" />
     <circle cx="24" cy="24" r="5" fill="currentColor" />
+  </svg>,
+  // Engineering: brackets
+  <svg key="e" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" className="size-12">
+    <rect x="4" y="8" width="40" height="32" rx="6" opacity="0.35" />
+    <path d="M4 16h40" opacity="0.35" />
+    <path d="m18 23-5 5 5 5M30 23l5 5-5 5M26 21l-4 14" />
   </svg>,
 ];
 

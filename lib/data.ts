@@ -7,18 +7,18 @@ export const site = {
   lastName: "Rashid",
   role: "Product Manager, Tech",
   /** The roles people search for. They lead the page title, the hero and the structured data. */
-  roles: ["Software Engineer", "Data Analyst", "Product Manager"],
+  roles: ["Product Manager", "Data Analyst", "Software Engineer"],
   company: "Empire Capital BD",
-  headline: "Software Engineer, Data Analyst and Product Manager in Dhaka, Bangladesh",
+  headline: "Product Manager, Data Analyst and Software Engineer in Dhaka, Bangladesh",
   location: "Dhaka, Bangladesh",
   timezone: "Asia/Dhaka",
   email: "mushfiqur.tech@gmail.com",
   phone: "+8801720097317",
   phoneDisplay: "+880 1720 097317",
   cv: "/cv/Md_Mushfiqur_Rashid_Marmo_CV.pdf",
-  title: "Mushfiqur Rashid | Software Engineer, Data Analyst & Product Manager in Bangladesh",
+  title: "Mushfiqur Rashid | Product Manager, Data Analyst & Software Engineer in Bangladesh",
   description:
-    "Mushfiqur Rashid is a software engineer, data analyst and product manager in Dhaka, Bangladesh, shipping full stack platforms, machine learning and AI products.",
+    "Mushfiqur Rashid is a product manager, data analyst and software engineer in Dhaka, Bangladesh, shipping full stack platforms, machine learning and AI products.",
   socials: {
     github: "https://github.com/MushfiqurRashid",
     linkedin: "https://www.linkedin.com/in/mushfiqur-rashid-5a8583238",
@@ -47,9 +47,9 @@ export const sections = [
 export const heroRoles = ["digital products", "AI systems", "data driven tools", "ecommerce platforms"];
 
 export const marqueeItems = [
-  "Software Engineering",
-  "Data Analysis",
   "Product Management",
+  "Data Analysis",
+  "Software Engineering",
   "Full Stack Development",
   "Applied AI",
   "Machine Learning",
@@ -62,7 +62,7 @@ export const marqueeItems = [
 
 // Words wrapped in *asterisks* are highlighted.
 export const aboutText =
-  "I'm a *software engineer,* *data analyst* and *product manager* from Dhaka, Bangladesh. I turn business requirements into clear specs, build the platforms myself, ship them to production and keep them running. From ecommerce and capital markets to agritech, I bring product thinking, full stack craft and applied AI to products people actually use.";
+  "I'm a *product manager,* *data analyst* and *software engineer* from Dhaka, Bangladesh. I turn business requirements into clear specs, build the platforms myself, ship them to production and keep them running. From ecommerce and capital markets to agritech, I bring product thinking, data driven decisions, full stack craft and applied AI to products people actually use.";
 
 export const pillars = [
   {
@@ -71,14 +71,14 @@ export const pillars = [
     tags: ["Roadmaps", "Requirements", "Stakeholders"],
   },
   {
-    title: "Full Stack Engineering",
-    body: "I build with React, Next.js, Node.js and PostgreSQL, then deploy and run it all on Vercel and VPS infrastructure, domains and DNS included.",
-    tags: ["Next.js", "Node.js", "PostgreSQL"],
-  },
-  {
     title: "Data Analysis & AI",
     body: "From SQL and Python analysis to RAG assistants and explainable ML, I turn raw data into decisions and models into products people can use.",
     tags: ["Python & SQL", "Machine Learning", "RAG"],
+  },
+  {
+    title: "Full Stack Engineering",
+    body: "I build with React, Next.js, Node.js and PostgreSQL, then deploy and run it all on Vercel and VPS infrastructure, domains and DNS included.",
+    tags: ["Next.js", "Node.js", "PostgreSQL"],
   },
 ];
 
@@ -375,6 +375,21 @@ export const toolkit = [
     ],
   },
   {
+    title: "Data Analysis & Databases",
+    items: [
+      "Data Analysis",
+      "SQL",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Pandas",
+      "NumPy",
+      "Data Visualization",
+      "Data Modeling",
+      "ETL",
+    ],
+  },
+  {
     title: "Software Engineering",
     items: ["React", "Next.js", "Node.js", "TypeScript", "JavaScript", "REST APIs"],
   },
@@ -390,21 +405,6 @@ export const toolkit = [
       "PyTorch",
       "TensorFlow",
       "Explainable AI",
-    ],
-  },
-  {
-    title: "Data Analysis & Databases",
-    items: [
-      "Data Analysis",
-      "SQL",
-      "PostgreSQL",
-      "MySQL",
-      "MongoDB",
-      "Pandas",
-      "NumPy",
-      "Data Visualization",
-      "Data Modeling",
-      "ETL",
     ],
   },
   {

@@ -18,7 +18,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { ArrowUpRight, Download, GitHub, LinkedIn, Mail, Sparkle, Trophy } from "@/components/icons";
 import { heroRoles, site } from "@/lib/data";
 import { LocalTime } from "@/components/ui/local-time";
-import { EASE_OUT_EXPO } from "@/lib/utils";
+import { cn, EASE_OUT_EXPO } from "@/lib/utils";
 import { useMediaQuery } from "@/lib/hooks";
 
 const fadeUp: Variants = {
@@ -184,8 +184,8 @@ export function Hero() {
               className="mb-5 overflow-hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/80 max-[359px]:tracking-[0.12em] sm:mb-7 sm:tracking-[0.3em]"
             >
               <span className="-ml-6 flex flex-wrap gap-y-1.5">
-                {site.roles.map((role) => (
-                  <span key={role} className="flex items-center whitespace-nowrap">
+                {site.roles.map((role, i) => (
+                  <span key={role} className={cn("flex items-center whitespace-nowrap", i === 0 && "text-ember")}>
                     <span aria-hidden="true" className="grid w-6 shrink-0 place-items-center">
                       <Sparkle className="size-2 text-ember" />
                     </span>
@@ -227,7 +227,7 @@ export function Hero() {
 
             <motion.p variants={fadeUp} custom={0.48} className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
               Based in Dhaka, Bangladesh, I turn business requirements into production ready platforms with
-              product management, full stack engineering, data analysis and applied AI.
+              product management, data analysis, full stack engineering and applied AI.
             </motion.p>
 
             <motion.div variants={fadeUp} custom={0.56} className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
