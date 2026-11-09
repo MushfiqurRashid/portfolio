@@ -56,8 +56,9 @@ const PITCH = 18;
 const perfX = Array.from({ length: STAMP_W / PITCH + 1 }, (_, i) => i * PITCH);
 const perfY = Array.from({ length: STAMP_H / PITCH + 1 }, (_, i) => i * PITCH);
 
-/** A postage stamp for the not-yet-launched philately store. */
-function Stamp({ accent }: { accent: string }) {
+/** A postage stamp preview for collectibles projects without a screenshot. */
+function Stamp({ item }: { item: WorkItem }) {
+  const { accent } = item;
   const maskId = `stamp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   return (
     <div className="relative mx-auto w-[66%] max-w-[330px] py-6">
@@ -82,7 +83,7 @@ function Stamp({ accent }: { accent: string }) {
         </svg>
         <div className="absolute inset-[6%] flex flex-col overflow-hidden border border-[#1d1026]/25 p-4 text-[#1d1026]">
           <div className="flex items-start justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
-            <span>Empire Philately</span>
+            <span>{item.title}</span>
             <span>No. 01</span>
           </div>
           <div className="relative my-3 flex flex-1 items-center justify-center">
@@ -113,7 +114,7 @@ function Stamp({ accent }: { accent: string }) {
           <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" strokeWidth="1.5" />
           <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" strokeWidth="1" />
           <text fill="currentColor" className="font-mono text-[10px] uppercase tracking-[0.25em]">
-            <textPath href="#postmark">In development • Coming soon •</textPath>
+            <textPath href="#postmark">{item.status === "Live" ? "Live online • Explore the collection •" : "In development • Coming soon •"}</textPath>
           </text>
         </svg>
         <Sparkle className="absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2" style={{ color: accent }} />
@@ -218,7 +219,7 @@ function WorkCard({
 
           <div className="order-first flex items-center lg:order-none lg:col-span-7">
             <div className="w-full">
-              {item.image ? <BrowserFrame item={item} imageScale={imageScale} /> : <Stamp accent={item.accent} />}
+              {item.image ? <BrowserFrame item={item} imageScale={imageScale} /> : <Stamp item={item} />}
             </div>
           </div>
         </div>
